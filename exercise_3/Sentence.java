@@ -13,17 +13,17 @@ public class Sentence {
 
 	// Instanzmethode length
 	private int length(){
-		return this.tokens.length; 	//Was ist hier der Unterschied zwischen tokens.length und this.tokens.length?
+		return this.tokens.length; //Was ist hier der Unterschied zwischen tokens.length und this.tokens.length?
 	}
 
 	// Instanzmethode getToken
 	public String getToken(int i) {
-		return this.tokens[i];			//Vereinfacht
+		return this.tokens[i];	//Vereinfacht
 	}
 
 	// Instanzmethode setToken
 	private void setToken(int i, String t){
-		this.tokens[i] = t;					//Alte Methode hat nicht das eigentliche Sentence-Objekt editiert
+		this.tokens[i] = t;	//Alte Methode hat nicht das eigentliche Sentence-Objekt editiert
 	}
 	
 
