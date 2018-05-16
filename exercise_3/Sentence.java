@@ -27,14 +27,8 @@ public class Sentence {
 
 
   // Instanzmethode equals
-  public boolean equals(Sentence otherSent) {
+  public boolean equals(Sentence otherSent){
 
-    for (int i = 0; i < this.tokens.length; i++) {
-      if (this.getToken(i) != otherSent.getToken(i)) {
-        return false;
-      }
-    }
-
-    return true;
+    return Arrays.equals(this.tokens, otherSent.tokens);
   }
 }
