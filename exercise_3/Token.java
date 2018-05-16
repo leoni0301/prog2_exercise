@@ -1,4 +1,4 @@
-    public class Token {
+public class Token {
 
         int id; // Position im Satz
         String surface; // orthographischen Wortform
@@ -7,9 +7,6 @@
         int head; // Kopf eines Wortes
         String rel; // Art der Beziehung zwischen Abhaengigem und Kopf
 
-        Token (){
-
-        }
 
         // Konstruktor
         Token ( int id, String surface, String lemma, String pos, int head, String rel ){
@@ -22,12 +19,13 @@
             this.rel = rel;
 
         }
+        
+        //ist jetzt auf this bezogen
+        private boolean equals(Token token2) {
 
-        private boolean equals(Token token1, Token token2) {
-
-            boolean status1 = token1.surface.equals(token2.surface);
-            boolean status2 = token1.lemma.equals(token2.lemma);
-            boolean status3 = token1.pos.equals(token2.pos);
+            boolean status1 = this.surface.equals(token2.surface);
+            boolean status2 = this.lemma.equals(token2.lemma);
+            boolean status3 = this.pos.equals(token2.pos);
             return status1 && status2 && status3;
         }
 
@@ -37,7 +35,7 @@
             Token token1 = new Token(1, "Mann", "Mann", "AR", 2, "NK");
             Token token2 = new Token(2, "Mann", "Mann", "NN", 3, "SB");
             // String [] Sent = new String[] {"Der", "Mann", "hat", "angerufen,", "der", "gestern", "da", "war"};
-            System.out.println(token1.equals(token1, token2));
+            System.out.println(token1.equals(token2));
         }
 
-    }
+}
