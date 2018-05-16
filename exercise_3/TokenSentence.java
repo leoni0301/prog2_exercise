@@ -7,12 +7,12 @@ public class TokenSentence {
 	private Token[] tokens;
 
 	// Konstruktor
-	TokenSentence ( Token[] tokens ){
+	public TokenSentence ( Token[] tokens ){
 		this.tokens = tokens;
 	}
 
 	// Instanzmethode length
-	private int length(){
+	public int length(){
 		return this.tokens.length; 
 	}
 
@@ -22,14 +22,14 @@ public class TokenSentence {
 	}
 
 	// Instanzmethode setToken
-	private void setToken(int i, Token t){
+	public void setToken(int i, Token t){
 		this.tokens[i] = t;	
 	}
 	
 
 	// Instanzmethode equals
 	public boolean equals(TokenSentence otherSent){
-		//ungleich bei verschiedener Länge
+		//ungleich bei verschiedener LÃ¤nge
 		if(otherSent.length() != this.length()) {
 			return false;
 		}else {
@@ -41,27 +41,5 @@ public class TokenSentence {
 			}
 			return true;
 		}
-	}
-
-	
-	public static void main(String[] args) {
-
-		// create instances
-		Token Token1 = new Token(1,"Der","der","ART",2,"NK");
-		Token Token2 = new Token(2,"Mann", "Mann","NN",3,"SB");
-		Token Token3 = new Token(3,"hat", "haben", "VAFIN", 0,"");
-		Token[] firstSent = new Token[] {Token1, Token2, Token3};
-		Token[] secondSent = new Token[] {Token1, Token2, Token3};
-		TokenSentence Sent = new TokenSentence(firstSent);
-		TokenSentence otherSent = new TokenSentence(secondSent);
-
-		// Aufruf: Instanzmethode length
-		System.out.println("Der Satz beinhaltet " + Sent.length() + " Wörter.");
-		// Aufruf: Instanzmethode equals
-		System.out.println("Sind die Sätze äquivalent? " + Sent.equals(otherSent));
-		// Aufruf: Instanzmethode setToken
-		Sent.setToken(0, Token3);
-		// Erneutes prüfen auf equality
-		System.out.println("Sind die Sätze äquivalent? " + Sent.equals(otherSent));
 	}
 }
