@@ -12,7 +12,7 @@ public class Sentence {
 
   // Instanzmethode length
   public int length() {
-    return this.tokens.length; //Ich glaube, dass er bei tokens.length auf die Instanzvariable zugreift und bei this.tokens auf den Konstruktor also ist this.tokens die bessere Variante
+    return this.tokens.length;
   }
 
   // Instanzmethode getToken
