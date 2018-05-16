@@ -1,6 +1,6 @@
 public class SentenceTester {
 
-  private static void testSentence(){
+  private static void testSentenceEquals() {
 
     // create instances
     String[] firstSent = new String[]{"Der", "Mann", "hat"};
@@ -18,7 +18,7 @@ public class SentenceTester {
     System.out.println("Sind die Sätze äquivalent? " + sent.equals(otherSent));
   }
 
-  private static void testTokenSentence() {
+  private static void testTokenSentenceEquals() {
     // create instances
     Token Token1 = new Token(1, "Der", "der", "ART", 2, "NK");
     Token Token2 = new Token(2, "Mann", "Mann", "NN", 3, "SB");
@@ -38,10 +38,35 @@ public class SentenceTester {
     System.out.println("Sind die Sätze äquivalent? " + sent.equals(otherSent));
   }
 
+  private static void testTokenSentenceFindLeaves() {
+
+    Token[] sentence = new Token[]{
+        new Token(1, "Der", "der", "ART", 2, "NK"),
+        new Token(2, "Mann", "Mann", "NN", 3, "SB"),
+        new Token(3, "hat", "haben", "VAFIN", 0, ""),
+        new Token(4, "angerufen", "anrufen", "VVPP", 3, "OC"),
+        new Token(5, ",", ",", "$,", 4, ""),
+        new Token(6, "der", "der", "PRELS", 9, "SB"),
+        new Token(7, "gestern", "gestern", "ADV", 9, "MO"),
+        new Token(8, "da", "da", "ADV", 9, "MO"),
+        new Token(9, "war", "sein", "VAFIN", 2, "RC")
+    };
+    TokenSentence tokenSentence = new TokenSentence(sentence);
+
+    Token[] leaves = tokenSentence.findLeaves();
+
+    for (Token leave : leaves) {
+      System.out.println(leave.surface);
+    }
+  }
+
   public static void main(String[] args) {
 
-    //testSentence();
+    //testSentenceEquals();
 
-    testTokenSentence();
+    testTokenSentenceEquals();
+    System.out.println();
+
+    testTokenSentenceFindLeaves();
   }
 }

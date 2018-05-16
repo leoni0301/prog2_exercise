@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class TokenSentence {
@@ -25,7 +27,31 @@ public class TokenSentence {
 	public void setToken(int i, Token t){
 		this.tokens[i] = t;	
 	}
-	
+
+	// Findet alle Blätter und gibt sie als Array zurück.
+	public Token[] findLeaves() {
+
+		List<Token> leaveList = new ArrayList<Token>();
+		for (Token t: this.tokens) {
+
+			boolean isLeave = true;
+			for (Token t2: this.tokens) {
+
+				if (t2 == t) {
+					continue;
+				} else if (t2.head == t.id) {
+					isLeave = false;
+					break;
+				}
+			}
+
+			if (isLeave){
+				leaveList.add(t);
+			}
+		}
+
+		return leaveList.toArray(new Token[leaveList.size()]);
+	}
 
 	// Instanzmethode equals
 	public boolean equals(TokenSentence otherSent){
