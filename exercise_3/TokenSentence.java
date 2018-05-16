@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class TokenSentence {
 
-	// Instanzvariable vom Typ String-Array
+	// Instanzvariable vom Typ Token-Array
 	private Token[] tokens;
 
 	// Konstruktor
@@ -28,12 +28,12 @@ public class TokenSentence {
 	
 
 	// Instanzmethode equals
-//Instanzmethode equals
 	public boolean equals(TokenSentence otherSent){
-		
+		//ungleich bei verschiedener Länge
 		if(otherSent.length() != this.length()) {
 			return false;
 		}else {
+			//Vergleich von jedem Token mit Token.equals()
 			for(int i=0; i < this.length();i++) {
 				if(this.getToken(i).equals(otherSent.getToken(i)) == false){
 					return false;
