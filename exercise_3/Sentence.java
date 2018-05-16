@@ -1,5 +1,4 @@
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class Sentence {
 
@@ -12,51 +11,25 @@ public class Sentence {
 	}
 
 	// Instanzmethode length
-	private int length(){
-		return this.tokens.length; //Was ist hier der Unterschied zwischen tokens.length und this.tokens.length?
+	public int length(){
+		return this.tokens.length; //Ich glaube, dass er bei tokens.length auf die Instanzvariable zugreift und bei this.tokens auf den Konstruktor also ist this.tokens die bessere Variante
 	}
 
 	// Instanzmethode getToken
 	public String getToken(int i) {
-		return this.tokens[i];	//Vereinfacht
+		return this.tokens[i];	
 	}
 
 	// Instanzmethode setToken
-	private void setToken(int i, String t){
-		this.tokens[i] = t;	//Alte Methode hat nicht das eigentliche Sentence-Objekt editiert
+	public void setToken(int i, String t){
+		this.tokens[i] = t;	
 	}
 	
 
 	// Instanzmethode equals
-	private boolean equals(Sentence otherSent){
+	public boolean equals(Sentence otherSent){
 		
-		//So weit ich die Aufgabe lese sollen die Sätz nicht sortiert werden
-		boolean status = Arrays.equals(this.tokens, otherSent.tokens);
-		return status;
-	}
-
-	
-	public static void main(String[] args) {
-
-		Scanner scanner = new Scanner(System.in);
-		System.out.println("Enter a sentence: ");
-		String[] tokens1 = scanner.nextLine().split(" ");
-		scanner.close();
-
-		// create instances
-		Sentence Sent = new Sentence(tokens1);
-		String [] newSent = new String[] {"Das", "ist", "ein", "Satz"};
-		Sentence otherSent = new Sentence(newSent);
-
-		// Aufruf: Instanzmethode length
-		System.out.println("Der Satz beinhaltet " + Sent.length() + " Wörter.");
-		// Aufruf: Instanzmethode getToken
-		System.out.println("Das Wort \"" + Sent.getToken(0) + "\" befindet sich an der gesuchten Stelle.");
-		// Aufruf: Instanzmethode equals
-		System.out.println("Sind die Sätze äquivalent? " + Sent.equals(otherSent));
-		// Aufruf: Instanzmethode setToken
-		Sent.setToken(2, "Hallo");
-		// Erneutes prüfen auf equality
-		System.out.println("Sind die Sätze äquivalent? " + Sent.equals(otherSent));
+		//In der Aufgabenstellung stand "in der gleichen Reihenfolge" deshalb hab ich Array.sort verwendet" 
+		return Arrays.equals(this.tokens, otherSent.tokens);
 	}
 }
