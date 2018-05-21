@@ -12,6 +12,7 @@ public class TerminalKnoten extends Knoten {
       switch (this.subtype) {
         case "D":
         case "F":
+        case "I":
           break;
         default:
           this.subtype = "";

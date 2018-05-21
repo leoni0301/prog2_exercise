@@ -22,24 +22,22 @@ public class KnotenTest {
   }
 
   private static void testNichtTerminalToString() {
-
-    //Ebene 0   base1
-    //           /   \
-    //Ebene 1  math  base2
-    //               /   \
-    //Ebene 2     teach   er
-
-
+    //Ebene 4
+    TerminalKnoten establish = new TerminalKnoten("root", "establish", "V");
+    TerminalKnoten ment = new TerminalKnoten("affix", "ment", "D");
+    //Ebene 3
+    NichtTerminalKnoten base3 = new NichtTerminalKnoten("base",new Knoten[] {establish, ment});
+    TerminalKnoten anti = new TerminalKnoten("affix", "anti", "D");
     //Ebene 2
-    TerminalKnoten teach = new TerminalKnoten("root", "teach", "V");
-    TerminalKnoten er = new TerminalKnoten("affix", "er", "D");
+    NichtTerminalKnoten base2 = new NichtTerminalKnoten("base", new Knoten[] {anti, base3});
+    TerminalKnoten protest = new TerminalKnoten("root", "protest", "N");
     //Ebene 1
-    NichtTerminalKnoten base2 = new NichtTerminalKnoten("base",new Knoten[] {teach, er});
-    TerminalKnoten math = new TerminalKnoten("root", "math", "N");
+    NichtTerminalKnoten base1 = new NichtTerminalKnoten("base", new Knoten[] {base2, protest});
+    TerminalKnoten s = new TerminalKnoten("affix", "s", "I");
     //Ebene 0
-    NichtTerminalKnoten base1 = new NichtTerminalKnoten("base", new Knoten[] {math, base2});
+    NichtTerminalKnoten word = new NichtTerminalKnoten("word", new Knoten[] {base1, s});
 
-    System.out.println(base1);
+    System.out.println(word);
   }
 
   public static void main(String[] args) {
