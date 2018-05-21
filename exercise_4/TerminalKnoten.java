@@ -1,6 +1,6 @@
 public class TerminalKnoten extends Knoten {
-  String form;
-  String subtype;
+  private String form;
+  private String subtype;
 
 
   TerminalKnoten(String type, String form, String subtype) {

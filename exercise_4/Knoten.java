@@ -1,5 +1,5 @@
 public class Knoten {
-  String type;
+  private String type;
 
   Knoten (String type) {
     this.type = type.toLowerCase();
