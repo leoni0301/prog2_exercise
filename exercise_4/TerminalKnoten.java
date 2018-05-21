@@ -8,7 +8,7 @@ public class TerminalKnoten extends Knoten {
     this.form = form;
     this.subtype = subtype;
 
-    if (this.type == "affix") {
+    if (this.getType() == "affix") {
       switch (this.subtype) {
         case "D":
         case "F":
