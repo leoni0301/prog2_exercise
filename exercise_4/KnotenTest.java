@@ -16,7 +16,13 @@ public class KnotenTest {
     System.out.println("Wenn dieser Text nicht ausgegeben wird, wurde das Programm beendet.");
   }
 
+  private  static  void  testTerminalKnoten() {
+    TerminalKnoten tKnoten = new TerminalKnoten("root", "math", "N");
+    System.out.println(tKnoten.toString());
+  }
+
   public static void main(String[] args) {
     testType();
+    //testTerminalKnoten();
   }
 }
