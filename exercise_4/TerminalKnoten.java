@@ -9,10 +9,10 @@ public class TerminalKnoten extends Knoten {
     this.subtype = subtype;
 
     if (this.getType() == "affix") {
-      switch (this.subtype) {
+      switch (this.subtype) { 
         case "D":
-        case "F":
-        case "I":
+          break; // nach jedem case ein break
+        case "I": // hier sollen wir nur "I" verwenden siehe mail
           break;
         default:
           this.subtype = "";
