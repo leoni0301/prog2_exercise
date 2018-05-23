@@ -5,8 +5,11 @@ public class Knoten {
     this.type = type.toLowerCase();
     switch (this.type) {
       case "base":
+        break;
       case "word":
+        break;
       case "root":
+        break;
       case "affix":
         break;
       default:
