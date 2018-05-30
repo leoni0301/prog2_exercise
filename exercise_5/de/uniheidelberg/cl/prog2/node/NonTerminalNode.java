@@ -153,7 +153,6 @@ public class NonTerminalNode extends Node {
             if (c == OPENPAREN) {
               openings++;
             }
-            if (c == ")".charAt(0)) {
             if (c == CLOSINGPAREN) {
               closings++;
             }
