@@ -1,6 +1,8 @@
 
 package de.uniheidelberg.cl.prog2.node;
 
+import jdk.nashorn.internal.ir.Terminal;
+
 import java.util.*;
 import java.util.regex.*;
 
@@ -43,20 +45,20 @@ public class NonTerminalNode extends Node {
     //   class called 'opening' and 'closing' respectively
     //
 
-//    Pattern openingPattern = Pattern.compile("[S:(],[\\sVP:(]");
-//    Matcher opening = openingPattern.matcher(nodeRepr);
-//
-//    Pattern endingPattern = Pattern.compile("[\\s)]+");
-//    Matcher closing = endingPattern.matcher(nodeRepr);
-//
-//    Pattern emptyPattern = Pattern.compile("^\\s*$");
+    Pattern openingPattern = Pattern.compile("\\s*(S|VP):\\(\\s*");
+    Matcher opening = openingPattern.matcher(nodeRepr);
+
+    Pattern endingPattern = Pattern.compile("[\\s)]+");
+    Matcher closing = endingPattern.matcher(nodeRepr);
+
+    Pattern emptyPattern = Pattern.compile("^\\s*$");
 
     // Subtask (2) 0.5 Punkte
     // write an if test that uses the regular expressions
     // of the two Matcher objects 'opening' and 'closing'
     // to test if you have a non-terminal
 
-    if (opening.matches() || closing.matches()){
+    if (opening.matches() && closing.matches()){
 
       NonTerminalNode nt = new NonTerminalNode(opening.group(1), new ArrayList<Node>());
 
@@ -77,7 +79,8 @@ public class NonTerminalNode extends Node {
         // * apply its matcher method to nodeRepr and assign the resulting
         //   Matcher object to a variable 'term'
 
-        // <your implementation here>
+        Pattern termPattern = Pattern.compile("\\s*([^\\s:()]+):([^\\s:()]+)\\s*");
+        Matcher term = termPattern.matcher(nodeRepr);
 
         // we check if we have terminal in front of us
         if (term.lookingAt()) {
@@ -90,7 +93,7 @@ public class NonTerminalNode extends Node {
           // expression above, you could now access the relevant string with
           // the group-method of your Matcher term.
 
-          // <your implementation here>
+          String terminal = term.group(0);
 
           // Subtask (5) 0.5 Punkte
           // now that you have isolated the string that
@@ -100,7 +103,9 @@ public class NonTerminalNode extends Node {
           //   string you extracted above to the parse-method)
           // * assign the new Node instance to a variable called 'tnode'
 
-          // <your implementation here>;
+
+          TerminalNode tnode = TerminalNode.parse();
+
 
           // we add the Node tnode that we just generated
           // to the list of children of the  current non-terminal node nt
