@@ -1,7 +1,4 @@
-
 package de.uniheidelberg.cl.prog2.node;
-
-import jdk.nashorn.internal.ir.Terminal;
 
 import java.util.*;
 import java.util.regex.*;
@@ -45,32 +42,33 @@ public class NonTerminalNode extends Node {
     //   class called 'opening' and 'closing' respectively
     //
 
-    Pattern openingPattern = Pattern.compile("\\s*(S|VP):\\(\\s*");
-    Matcher opening = openingPattern.matcher(nodeRepr);
+    Pattern emptypattern = Pattern.compile("^\\s*$");
+    Pattern startpattern = Pattern.compile("\\s*([^\\s:()]+):\\(");
+    Pattern closepattern = Pattern.compile("\\s\\)\\z");
 
-    Pattern endingPattern = Pattern.compile("[\\s)]+");
-    Matcher closing = endingPattern.matcher(nodeRepr);
+    Matcher opening = startpattern.matcher(nodeRepr);
+    Matcher closing = closepattern.matcher(nodeRepr);
 
-    Pattern emptyPattern = Pattern.compile("^\\s*$");
 
     // Subtask (2) 0.5 Punkte
     // write an if test that uses the regular expressions
     // of the two Matcher objects 'opening' and 'closing'
     // to test if you have a non-terminal
 
-    if (opening.matches() && closing.matches()){
+    if (opening.lookingAt() && closing.find()) {
+
+      System.out.println(opening.group(1));
 
       NonTerminalNode nt = new NonTerminalNode(opening.group(1), new ArrayList<Node>());
+
 
       // we remove the parentheses that enclosed the non-terminal node
       // we are then going to check inside the non-terminal node string
       // to see if it contains further non-terminal or terminal nodes
-
       // we delete the closing parentheses at the end first so that indices for
       // the start don't move!
       nodeRepr.delete(closing.end() - 1, closing.end());
       nodeRepr.delete(0, opening.end());
-
 
       while (nodeRepr.length() > 0) {
 
@@ -79,8 +77,8 @@ public class NonTerminalNode extends Node {
         // * apply its matcher method to nodeRepr and assign the resulting
         //   Matcher object to a variable 'term'
 
-        Pattern termPattern = Pattern.compile("\\s*([^\\s:()]+):([^\\s:()]+)\\s*");
-        Matcher term = termPattern.matcher(nodeRepr);
+        // <your implementation here>
+        Matcher term = Pattern.compile("\\s*([^\\s:()]+):([^\\s:()]+)\\s*").matcher(nodeRepr);
 
         // we check if we have terminal in front of us
         if (term.lookingAt()) {
@@ -93,6 +91,7 @@ public class NonTerminalNode extends Node {
           // expression above, you could now access the relevant string with
           // the group-method of your Matcher term.
 
+          // <your implementation here>
           String terminal = term.group(0);
 
           // Subtask (5) 0.5 Punkte
@@ -103,9 +102,8 @@ public class NonTerminalNode extends Node {
           //   string you extracted above to the parse-method)
           // * assign the new Node instance to a variable called 'tnode'
 
-
-          TerminalNode tnode = TerminalNode.parse();
-
+          // <your implementation here>;
+          Node tnode = TerminalNode.parse(nodeRepr);
 
           // we add the Node tnode that we just generated
           // to the list of children of the  current non-terminal node nt
@@ -120,12 +118,12 @@ public class NonTerminalNode extends Node {
           // potentially, we can now find a non-terminal
 
           // Subtask (6) 0.5 Punkte
-          // use the Pattern 'emptyPattern' (see above) in an if-test
+          // use the Pattern 'emptypattern' (see above) in an if-test
           // to check if nodeRepr contains no further material that could be
           // a node; if that is so, break out of the while loop
 
 
-          if (<your implementation here >){
+          if (emptypattern.matcher(nodeRepr).matches()) {
 
             break;
           }
@@ -155,11 +153,17 @@ public class NonTerminalNode extends Node {
           int i = 0;
           while (i < nodeRepr.length()) {
             c = nodeRepr.charAt(i);
-
-            // <your
-            //  implementation
-            //  goes
-            //  here>
+            if (c == "(".charAt(0)) {
+              openings++;
+            }
+            ;
+            if (c == ")".charAt(0)) {
+              closings++;
+            }
+            ;
+            if (openings != 0 && openings == closings) {
+              break;
+            }
 
             i++;
           }
@@ -180,6 +184,7 @@ public class NonTerminalNode extends Node {
           //   of type Node called 'ntnode'
 
           // <your implementation here>
+          Node ntnode = NonTerminalNode.parse(newnonterm);
 
           // add Node to children of current non-terminal node nt
           nt.getChildren().add(ntnode);
@@ -192,7 +197,7 @@ public class NonTerminalNode extends Node {
       }
       return nt;
 
-    }else{
+    } else {
       // it's not a non-terminal node after all
       return null;
     }
