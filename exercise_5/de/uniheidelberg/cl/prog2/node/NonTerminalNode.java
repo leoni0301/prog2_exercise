@@ -150,6 +150,9 @@ public class NonTerminalNode extends Node {
           int i = 0;
           while (i < nodeRepr.length()) {
             c = nodeRepr.charAt(i);
+
+            i++;
+
             if (c == OPENPAREN) {
               openings++;
             }
@@ -159,8 +162,6 @@ public class NonTerminalNode extends Node {
             if (openings != 0 && openings == closings) {
               break;
             }
-
-            i++;
           }
 
           // now we extract the string that represents the non-terminal
