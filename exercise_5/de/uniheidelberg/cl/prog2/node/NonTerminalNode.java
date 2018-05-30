@@ -150,10 +150,11 @@ public class NonTerminalNode extends Node {
           int i = 0;
           while (i < nodeRepr.length()) {
             c = nodeRepr.charAt(i);
-            if (c == '(') {
+            if (c == OPENPAREN) {
               openings++;
             }
-            if (c == ')') {
+            if (c == ")".charAt(0)) {
+            if (c == CLOSINGPAREN) {
               closings++;
             }
             if (openings != 0 && openings == closings) {
