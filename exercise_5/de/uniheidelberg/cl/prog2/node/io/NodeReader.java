@@ -1,4 +1,6 @@
 
+package de.uniheidelberg.cl.prog2.node.io;
+
 import de.uniheidelberg.cl.prog2.node.Node;
 
 import java.io.*;
