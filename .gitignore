@@ -51,3 +51,4 @@ fabric.properties
 # Editor-based Rest Client
 .idea/httpRequests
 /exercise_3/.idea/workspace.xml
+workspace.xml

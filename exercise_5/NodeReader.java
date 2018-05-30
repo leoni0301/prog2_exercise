@@ -1,75 +1,97 @@
-	import de.uniheidelberg.cl.prog2.node.*;
-	import java.io.*;
-	import java.util.*;
+import de.uniheidelberg.cl.prog2.node.Node;
 
-	/**
-	 *  Reads parse trees (Node objects) from  file and returns an iterator over the Nodes
-	 *  
-	 *  @author ruppenhofer, building on:
-	 * 	@author ks spreyer@cl.uni-heidelberg.de
-	 */
-	public class NodeReader {
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
 
-	    private BufferedReader br;
-	    private boolean hasMore;
-	    private Node nextNode;
-	    
-	    public NodeReader( Reader in ) {
-		this.br = new BufferedReader( in );
-		this.hasMore = true;
-		computeNextNode();
-	    }
+/**
+ *  Reads parse trees (de.uniheidelberg.cl.prog2.node.Node objects) from  file and returns an iterator over the Nodes
+ *
+ *  @author ruppenhofer, building on:
+ * 	@author ks spreyer@cl.uni-heidelberg.de
+ */
+public class NodeReader {
 
-	    public Node next() {
-		Node nt = this.nextNode;
-		computeNextNode();
-		return nt;
-	    }
+    private BufferedReader br;
+    private boolean hasMore;
+    private Node nextNode;
 
-	    public boolean hasNext() {
-		return this.hasMore;
-	    }
+    // Konstruktor
+    public NodeReader(Reader in ) {
+    this.br = new BufferedReader( in );
+    this.hasMore = true;
+    computeNextNode();
+    }
 
-	    public void close() {
-		try {
-		    this.br.close();
-		} catch ( IOException e ) {
-		    System.err.println(e.getMessage());
-		    System.exit(1);
-		}
-	    }
+    // public method
+    public Node next() {
+    Node nt = this.nextNode;
+    computeNextNode();
+    return nt;
+    }
 
+    // public method
+    public boolean hasNext() {
+    return this.hasMore;
+    }
 
-	    /**
-	    *    	Die Methode soll bei jedem Aufruf eine einzelne Zeile aus br lesen. Falls diese Zeile
-		*	gleich null ist, sollen die Instanzvariablen hasMore und nextNode auf false bzw.
-		*	null gesetzt werden. 
-	    *  Andernfalls soll die parse-Methode der Klasse Node aufgerufen
-		*	werden, um für die textuelle Syntaxbaum-Darstellung in der aktuellen Zeile ein
-		*	Node-Objekt zu erhalten. Dieses Objekt soll dann in nextNode gespeichert werden.
-		*	Beachten Sie, dass die I/O-Operationen des BufferedReader’s von einem try/catch-
-		*	Block umgeben werden müssen. (4 Punkte)
-		*/
-
-	    private void computeNextNode ( ){
-		// <your implementation here>
-	    }
+    // public method
+    public void close() {
+    try {
+        this.br.close();
+    } catch ( IOException e ) {
+        System.err.println(e.getMessage());
+        System.exit(1);
+    }
+    }
 
 
-	    public static void main( String[] args ) {
+    /**
+    *    	Die Methode soll bei jedem Aufruf eine einzelne Zeile aus br lesen. Falls diese Zeile
+    *	gleich null ist, sollen die Instanzvariablen hasMore und nextNode auf false bzw.
+    *	null gesetzt werden.
+    *  Andernfalls soll die parse-Methode der Klasse de.uniheidelberg.cl.prog2.node.Node aufgerufen
+    *	werden, um für die textuelle Syntaxbaum-Darstellung in der aktuellen Zeile ein
+    *	de.uniheidelberg.cl.prog2.node.Node-Objekt zu erhalten. Dieses Objekt soll dann in nextNode gespeichert werden.
+    *	Beachten Sie, dass die I/O-Operationen des BufferedReader’s von einem try/catch-
+    *	Block umgeben werden müssen. (4 Punkte)
+    */
 
-		try {
-			
-		    FileReader in = new FileReader( args[0] );
-		    NodeReader nr = new NodeReader(in);
-		    while ( nr.hasNext() ) {
-			System.out.println("PARSE " + nr.next() );
-		    }
-		    nr.close();
-		} catch ( IOException e ) {
-		    System.err.println( e.getMessage() );
-		    System.exit(1);
-		}
-	    }
 
-	}
+    private void computeNextNode ( ){
+        try {
+            String line = this.br.readLine();
+            if (line == null) {
+                this.hasMore = false;
+                this.nextNode = null;
+            } else {
+                Node Nodeobj = Node.parse(new StringBuilder(line));
+                this.nextNode = Nodeobj;
+            }
+            this.br.close();
+        } catch ( IOException e ) {
+            e.printStackTrace();
+//				System.err.println(e.getMessage());
+            System.exit(1);
+        }
+    }
+
+
+    public static void main( String[] args ) {
+
+    try {
+
+        FileReader in = new FileReader( args[0] );
+        NodeReader nr = new NodeReader(in);
+        while ( nr.hasNext() ) {
+        System.out.println("PARSE " + nr.next() );
+        }
+        nr.close();
+    } catch ( IOException e ) {
+        System.err.println( e.getMessage() );
+        System.exit(1);
+    }
+    }
+
+}
