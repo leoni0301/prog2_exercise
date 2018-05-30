@@ -78,8 +78,7 @@ public class NodeReader {
   public static void main(String[] args) {
 
     try {
-      FileReader in = new FileReader("parse-trees.txt");
-      // FileReader in = new FileReader(args[0]);
+      FileReader in = new FileReader(args[0]);
       NodeReader nr = new NodeReader(in);
       while (nr.hasNext()) {
         System.out.println("PARSE " + nr.next());
