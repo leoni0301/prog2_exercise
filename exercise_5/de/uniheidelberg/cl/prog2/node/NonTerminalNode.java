@@ -44,7 +44,7 @@ public class NonTerminalNode extends Node {
 
     Pattern emptypattern = Pattern.compile("^\\s*$");
     Pattern startpattern = Pattern.compile("\\s*([^\\s:()]+):\\(");
-    Pattern closepattern = Pattern.compile("\\s\\)\\z");
+    Pattern closepattern = Pattern.compile("\\s*\\)");
 
     Matcher opening = startpattern.matcher(nodeRepr);
     Matcher closing = closepattern.matcher(nodeRepr);
@@ -55,7 +55,7 @@ public class NonTerminalNode extends Node {
     // of the two Matcher objects 'opening' and 'closing'
     // to test if you have a non-terminal
 
-    if (opening.lookingAt() && closing.find()) {
+    if (opening.find() && closing.find()) {
 
       NonTerminalNode nt = new NonTerminalNode(opening.group(1), new ArrayList<Node>());
 
