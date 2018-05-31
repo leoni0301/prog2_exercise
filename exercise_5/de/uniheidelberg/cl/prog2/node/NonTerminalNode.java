@@ -199,3 +199,6 @@ public class NonTerminalNode extends Node {
   }
 
 }
+
+// Bei der momentanen Implementierung würde ein Teil des yields nicht berücksichtigt, somit gelöscht und der Rest nicht mehr geparst werden.
+// Die Regex-Muster könnten so angepasst werden, dass Klammern und Doppelpunkte mit einem Escape-Zeichen "ausgeschaltet" werden könnten und somit nicht mehr als Sonderzeichen gelten würden.
