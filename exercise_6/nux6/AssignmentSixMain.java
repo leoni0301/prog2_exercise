@@ -20,9 +20,17 @@ public class AssignmentSixMain {
     Corpus corpus = Corpus.readCorpusFromFile("nux6/de.txt");
   }
 
+  private static void testCorpus_load() throws IOException {
+    Corpus corpus = Corpus.readCorpusFromFile("nux6/de.txt");
+    corpus.save("temp.txt");
+
+    corpus = new Corpus("temp.txt");
+  }
+
   public static void main(String[] args) throws IOException {
 
-    testCorpus_readCorpusFromFile();
+    //testCorpus_readCorpusFromFile();
+    testCorpus_load();
 
 //    log.setLevel(Level.INFO);
 //    String corpus_file = args[0] + "/corpus.save";

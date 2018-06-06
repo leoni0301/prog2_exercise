@@ -4,7 +4,9 @@ import io.CorpusReader;
 
 import java.io.*;
 import java.nio.charset.Charset;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class Corpus {
@@ -42,19 +44,24 @@ public class Corpus {
     Path p1 = Paths.get(filename);
     Charset charset = Charset.defaultCharset();
     BufferedReader br = Files.newBufferedReader(p1, charset);
+
     this.content = new ArrayList<>();
 
     String line = null;
     while ((line = br.readLine()) != null) {
-      this.content.add(line.split("\t"));
+      String trimmed = line.trim();
+      if (!trimmed.equals("")){
+        this.content.add(trimmed.split("\t"));
+      }
     }
+
     br.close();
   }
 
   /*when writing, separate each word in a sentence array by tabs*/
   public void save(String filename) throws IOException {
     Path p1 = Paths.get(filename);
-    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filename), "UTF-8"));
+    BufferedWriter bw = Files.newBufferedWriter(p1, Charset.forName("UTF-8"));
 
     for (String[] s : this.content) {
       bw.write(String.join("\t", s) + "\n");
