@@ -1,85 +1,76 @@
 package data;
 
-import io.CorpusReader; // (1b)
-import java.io.*;	// (1b)
+import io.CorpusReader;
 
-// repräsentiert ein Korpus, aus dem n-Gramme extrahiert werden können
-
+import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Corpus {
 
-    /* An ArrayList of String-Arrays. Each String-Array is a tokenized sentence*/
-    private ArrayList<String[]> content;
+  /* An ArrayList of String-Arrays. Each String-Array is a tokenized sentence*/
+  private ArrayList<String[]> content;
 
-    private Corpus(ArrayList<String[]> content){
+  private Corpus(ArrayList<String[]> content) {
+    this.content = content;
+  }
 
-        this.content = content;
+  public Corpus(String filename) throws IOException {
+    this.load(filename);
+  }
+
+  public static Corpus readCorpusFromFile(String filename) {
+    // we get a list of sentence strings from a method
+    // of the CorpusReader class.
+    ArrayList<String> content = CorpusReader.readCorpus(filename);
+
+    ArrayList<String[]> sentences = new ArrayList<>();
+    for (String i : content) {
+      String trimmed = i.trim();
+      if (!trimmed.equals("")) {
+        sentences.add(trimmed.split(" "));
+      }
     }
 
-    public Corpus(String filename) throws IOException {
-        this.load(filename);
+    return new Corpus(sentences);
+  }
+
+  /* load a  stored corpus. each line is a sentence. the words in each
+  sentence are tab-separated (see split)*/
+  private void load(String filename) throws IOException {
+    Path p1 = Paths.get(filename);
+    Charset charset = Charset.defaultCharset();
+    BufferedReader br = Files.newBufferedReader(p1, charset);
+
+    this.content = new ArrayList<>();
+
+    String line = null;
+    while ((line = br.readLine()) != null) {
+      String trimmed = line.trim();
+      if (!trimmed.equals("")){
+        this.content.add(trimmed.split("\t"));
+      }
     }
 
-    public static Corpus readCorpusFromFile(String filename) {
-        // we get a list of sentence strings from a method
-	// of the CorpusReader class.
-        ArrayList<String> content = CorpusReader.readCorpus(filename);
+    br.close();
+  }
 
-        ArrayList<String[]> tokenizeSent = new ArrayList<>();
-        for (String i : content) {
-            if (!i.isEmpty()){
-                String[] newarr = i.split(" ");
-                tokenizeSent.add( newarr );
-            }
-        }
-        return new Corpus(tokenizeSent);
+  /*when writing, separate each word in a sentence array by tabs*/
+  public void save(String filename) throws IOException {
+    Path p1 = Paths.get(filename);
+    BufferedWriter bw = Files.newBufferedWriter(p1, Charset.forName("UTF-8"));
+
+    for (String[] s : this.content) {
+      bw.write(String.join("\t", s) + "\n");
     }
 
+    bw.close();
+  }
 
-
-    /* load a  stored corpus. each line is a sentence. the words in each
-    sentence are tab-separated (see split)*/
-    private void load(String filename) throws IOException {
-
-        Path p = Paths.get(filename);
-        this.content = new ArrayList<>();
-        List<String> myLines = Files.readAllLines(p);
-        for (String line : myLines) {
-            this.content.add(line.split("\t"));
-            }
-    }
-
-    /*when writing, separate each word in a sentence array by tabs*/
-    public void save(String filename) throws IOException {
-
-//        Path op = Paths.get(filename);
-//        Charset cs = Charset.forName ( "UTF−8" ) ;
-//
-//        for (String[] s : this.content) {
-//
-//
-//            Files.write(op, String.join("\t", s) + "\n" , cs, StandardOpenOption.CREATE_NEW);
-//
-//        }
-
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filename), "UTF-8"));
-
-        for (String[] s : this.content) {
-            bw.write(String.join("\t", s)+"\n");
-        }
-
-        bw.close();
-    }
-
-    public ArrayList<String[]> getCorpus() {
-        return this.content;
-    }
+  public ArrayList<String[]> getCorpus() {
+    return this.content;
+  }
 }
-
