@@ -1,10 +1,10 @@
 package data;
 
-import io.CorpusReader; // (1b)
+import io.CorpusReader;
 
-import java.io.*;  // (1b)
-
-
+import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.file.*;
 import java.util.ArrayList;
 
 public class Corpus {
@@ -24,23 +24,24 @@ public class Corpus {
     // we get a list of sentence strings from a method
     // of the CorpusReader class.
     ArrayList<String> content = CorpusReader.readCorpus(filename);
-    // (1a)
+
     ArrayList<String[]> sentences = new ArrayList<>();
-    for (String i: content) {
+    for (String i : content) {
       String trimmed = i.trim();
-      if (trimmed != "") {
+      if (!trimmed.equals("")) {
         sentences.add(trimmed.split(" "));
       }
     }
+
     return new Corpus(sentences);
-
   }
-
 
   /* load a  stored corpus. each line is a sentence. the words in each
   sentence are tab-separated (see split)*/
   private void load(String filename) throws IOException {
-    BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filename), "UTF-8"));
+    Path p1 = Paths.get(filename);
+    Charset charset = Charset.defaultCharset();
+    BufferedReader br = Files.newBufferedReader(p1, charset);
     this.content = new ArrayList<>();
 
     String line = null;
@@ -52,6 +53,7 @@ public class Corpus {
 
   /*when writing, separate each word in a sentence array by tabs*/
   public void save(String filename) throws IOException {
+    Path p1 = Paths.get(filename);
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filename), "UTF-8"));
 
     for (String[] s : this.content) {
