@@ -27,10 +27,17 @@ public class AssignmentSixMain {
     corpus = new Corpus("temp.txt");
   }
 
+  private static void testNGramModel_train() {
+    NGramModel model = new NGramModel(0);
+    Corpus corpus = Corpus.readCorpusFromFile("nux6/de.txt");
+    model.train(corpus.getCorpus());
+  }
+
   public static void main(String[] args) throws IOException {
 
     //testCorpus_readCorpusFromFile();
-    testCorpus_load();
+    //testCorpus_load();
+    testNGramModel_train();
 
 //    log.setLevel(Level.INFO);
 //    String corpus_file = args[0] + "/corpus.save";

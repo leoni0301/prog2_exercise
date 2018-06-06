@@ -38,10 +38,12 @@ public class NGramModel {
 
     private void addNGrams(String[] input) {
 
-	// (2a)
-	// your
-	// implementation
-	// here
+        NGram nGram = new NGram(input);
+        if (!counts.containsKey(nGram)){
+            counts.put(nGram, 1);
+        } else {
+            counts.put(nGram, counts.get(nGram) + 1);
+        }
     }
 
 
