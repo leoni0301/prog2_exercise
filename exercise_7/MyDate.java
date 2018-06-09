@@ -105,31 +105,4 @@ public class MyDate implements Comparable<MyDate>{
 	}
 	
 
-	public static void main(String[] args) {
-		MyDate test = null;
-		MyDate test2 = null;
-		MyDate test3 = null;
-		try {
-			test = new MyDate(15, 5, 2018);
-			test2 = new MyDate(16, 5,2018);
-			test3 = new MyDate(17,5,2017);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		int daytest = test.getDay();
-		System.out.println(daytest);
-		System.out.println(test.toString());
-		System.out.println(test.equals(test2));
-		ArrayList<MyDate> dates = new ArrayList<MyDate>();
-		dates.add(test);
-		dates.add(test2);
-		dates.add(test3);
-		
-		System.out.println(dates);
-		Collections.sort(dates);
-		System.out.println(dates);
-		Collections.sort(dates, new MonthDayComparator());
-		System.out.println(dates);
-	}
-
 }

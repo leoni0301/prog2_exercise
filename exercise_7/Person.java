@@ -74,17 +74,6 @@ public class Person implements Comparable<Person>{
 		return thisBirth.compareTo(otherBirt);
 	}
 
-	
-	public static void main(String[] args) {
-		MyDate test = null;
-		try {
-			test = new MyDate(15, 5, 2018);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		Name n1 = new Name("Katharina", "Katharina", "Schweinsteiger");
-		Person p1 = new Person(n1, test);
-		System.out.println(p1);
-	}
+
 }
 

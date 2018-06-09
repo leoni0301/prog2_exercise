@@ -111,21 +111,5 @@ public class Name implements Comparable<Name>{
 			return thisFirst.compareTo(otherFirst);
 		}
 		
-		
-		public static void main(String[] args) {
-			Name n1 = new Name("Simon", "Busch");
-			Name n2 = new Name("Small", "Test", "Dummy");
-			Name n3 = new Name("Great", "Test", "Dummy");
-			System.out.println(n1.toString());
-			System.out.println(n2.toString());
-			System.out.println(n3.toString());
-			System.out.println(n2.equals(n3));
-			ArrayList<Name> names = new ArrayList<Name>();
-			names.add(n1);
-			names.add(n2);
-			names.add(n3);
-			System.out.println(names);
-			Collections.sort(names);
-			System.out.println(names);
-		}
+
 }
