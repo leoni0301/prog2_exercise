@@ -52,3 +52,5 @@ fabric.properties
 .idea/httpRequests
 /exercise_3/.idea/workspace.xml
 workspace.xml
+*.class
+/exercise_6/temp.txt
