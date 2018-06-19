@@ -9,18 +9,18 @@ public class GraphTester {
         String filename = "./example_graph.txt";
 
         Graph withAdjacencyMatrix = new GraphWithAdjacencyMatrix(filename);
-        //Graph withAdjacencyList = new GraphWithAdjacencyList(filename);
+        Graph withAdjacencyList = new GraphWithAdjacencyList(filename);
 
         List<Graph> graphs = new ArrayList<>();
         List<String> names = new ArrayList<>();
         
         graphs.add(withAdjacencyMatrix);
-        //graphs.add(withAdjacencyList);
+        graphs.add(withAdjacencyList);
         
         names.add("adjacency matrix");
         names.add("adjacency list");
         
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 2; i++) {
             Graph g = graphs.get(i);
             String name = names.get(i);
             
