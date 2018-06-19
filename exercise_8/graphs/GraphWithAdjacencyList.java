@@ -9,6 +9,7 @@ public class GraphWithAdjacencyList implements Graph {
 
   HashMap<String,ArrayList<String>> adjacencyList;
 
+  // Laufzeit: O(n)
   public GraphWithAdjacencyList(String filename) {
     try {
       List<String> lines = Files.readAllLines(Paths.get(filename));
@@ -37,6 +38,7 @@ public class GraphWithAdjacencyList implements Graph {
     }
   }
 
+  // Laufzeit: O(1)
   @Override
   public boolean containsEdge(String i, String j) throws InvalidNodeException {
     if (!adjacencyList.containsKey(i) && !adjacencyList.containsKey(j)) {
@@ -50,6 +52,7 @@ public class GraphWithAdjacencyList implements Graph {
     }
   }
 
+  // Laufzeit: O(1)
   @Override
   public Collection<String> getNeighbours(String i) throws InvalidNodeException {
     if (!adjacencyList.containsKey(i)) {
@@ -58,6 +61,7 @@ public class GraphWithAdjacencyList implements Graph {
     return adjacencyList.get(i);
   }
 
+  // Laufzeit: O(1)
   @Override
   public boolean addEdge(String i, String j) throws InvalidNodeException {
     if (!adjacencyList.containsKey(i) && !adjacencyList.containsKey(j)) {
@@ -70,6 +74,7 @@ public class GraphWithAdjacencyList implements Graph {
     return alreadyExisted;
   }
 
+  // Laufzeit: O(1)
   @Override
   public boolean addNode(String i) {
     boolean alreadyExisted = adjacencyList.containsKey(i);

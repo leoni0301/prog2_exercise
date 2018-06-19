@@ -12,6 +12,7 @@ public class GraphWithAdjacencyMatrix implements Graph {
   private Integer nodeCount;
   private boolean[][] adjacencyMatrix;
 
+  // Laufzeit: O(n)
   public GraphWithAdjacencyMatrix(String filename) {
 
     try {
@@ -46,6 +47,7 @@ public class GraphWithAdjacencyMatrix implements Graph {
     }
   }
 
+  // Laufzeit: O(1)
   @Override
   public boolean containsEdge(String i, String j) throws InvalidNodeException {
     if (!nodes.containsKey(i) && !nodes.containsKey(j)) {
@@ -54,6 +56,7 @@ public class GraphWithAdjacencyMatrix implements Graph {
     return adjacencyMatrix[nodes.get(i)][nodes.get(j)];
   }
 
+  // Laufzeit: O(n)
   @Override
   public Collection<String> getNeighbours(String i) throws InvalidNodeException {
     if (!nodes.containsKey(i)) {
@@ -72,6 +75,7 @@ public class GraphWithAdjacencyMatrix implements Graph {
     return neighbours;
   }
 
+  // Laufzeit: O(1)
   @Override
   public boolean addEdge(String i, String j) throws InvalidNodeException {
     if (!nodes.containsKey(i) && !nodes.containsKey(j)) {
@@ -84,6 +88,7 @@ public class GraphWithAdjacencyMatrix implements Graph {
   return alreadyExisted;
 }
 
+  // Laufzeit: O(1)
   @Override
   public boolean addNode(String i) {
     boolean alreadyExisted = nodes.containsKey(i);
