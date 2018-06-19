@@ -48,22 +48,54 @@ public class GraphWithAdjacencyMatrix implements Graph {
 
   @Override
   public boolean containsEdge(String i, String j) throws InvalidNodeException {
+    if (!nodes.containsKey(i) && !nodes.containsKey(j)) {
+      throw new InvalidNodeException("i and j are not both contained in the graph.");
+    }
     return adjacencyMatrix[nodes.get(i)][nodes.get(j)];
   }
 
   @Override
   public Collection<String> getNeighbours(String i) throws InvalidNodeException {
-    return null;
+    if (!nodes.containsKey(i)) {
+      throw new InvalidNodeException("i is not contained in the graph.");
+    }
+    Integer myIndex = nodes.get(i);
+    ArrayList<String> neighbours = new ArrayList<>();
+    for (String label : nodes.keySet()) {
+      Integer otherIndex = nodes.get(label);
+      if (otherIndex != myIndex) {
+        if (adjacencyMatrix[myIndex][otherIndex]) {
+          neighbours.add(label);
+        }
+      }
+    }
+    return neighbours;
   }
 
   @Override
   public boolean addEdge(String i, String j) throws InvalidNodeException {
-    return false;
-  }
+    if (!nodes.containsKey(i) && !nodes.containsKey(j)) {
+      throw new InvalidNodeException("i and j are not both contained in the graph.");
+    }
+    boolean alreadyExisted = adjacencyMatrix[nodes.get(i)][nodes.get(j)];
+    if (!alreadyExisted) {
+      adjacencyMatrix[nodes.get(i)][nodes.get(j)] = true;
+    }
+  return alreadyExisted;
+}
 
   @Override
   public boolean addNode(String i) {
-    return false;
+    boolean alreadyExisted = nodes.containsKey(i);
+    if (!alreadyExisted) {
+      nodes.put(i, nodeCount);
+      nodeCount++;
+
+      boolean[][] newAdjMatrix = new boolean[nodeCount][nodeCount];
+      System.arraycopy(adjacencyMatrix, 0, newAdjMatrix, 0, adjacencyMatrix.length);
+      adjacencyMatrix = newAdjMatrix;
+    }
+    return alreadyExisted;
   }
 
   public Integer getNodeCount() {
