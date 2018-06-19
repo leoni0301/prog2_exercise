@@ -1,28 +1,24 @@
 package graphs;
 
-import complexnodes.Edge;
-import complexnodes.Node;
-
 import java.io.IOException;
 import java.util.*;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class GraphWithAdjacencyList implements Graph {
+public class GraphWithAdjacencyMatrix implements Graph {
 
-  private HashMap<String, Node> nodes;
-  private ArrayList<Edge> edges;
+  private HashMap<String, Integer> nodes;
   private Integer nodeCount;
+  private boolean[][] adjacencyMatrix;
 
-  public GraphWithAdjacencyList(String filename) {
+  public GraphWithAdjacencyMatrix(String filename) {
 
     try {
       List<String> lines = Files.readAllLines(Paths.get(filename));
 
       nodeCount = 0;
       nodes = new HashMap<>();
-      edges = new ArrayList<>();
 
       Iterator<String> iter = lines.iterator();
       while (iter.hasNext()) {
@@ -30,13 +26,18 @@ public class GraphWithAdjacencyList implements Graph {
         String[] parts = line.split(" ");
         if (lines.indexOf(line) > 0) {
           // Andere Zeilen
-          edges.add(new Edge(nodes.get(parts[0]), nodes.get(parts[1]), parts[0] + " " + parts[1], 0));
+          String leftNode = parts[0];
+          String rightNode = parts[1];
+          Integer leftNodeIndex = nodes.get(leftNode);
+          Integer rightNodeIndex = nodes.get(rightNode);
+          adjacencyMatrix[leftNodeIndex][rightNodeIndex] = true;
         } else {
           // Erste Zeile
           for (Integer i = 0; i < parts.length; i++) {
-            nodes.put(parts[i], new Node(parts[i], i));
+            nodes.put(parts[i], i);
             nodeCount++;
           }
+          adjacencyMatrix = new boolean[nodeCount][nodeCount];
         }
       }
 
@@ -47,7 +48,7 @@ public class GraphWithAdjacencyList implements Graph {
 
   @Override
   public boolean containsEdge(String i, String j) throws InvalidNodeException {
-    return edges.stream().anyMatch(e -> e.getFirstNode().getLabel().equals(i) && e.getSecondNode().getLabel().equals(j));
+    return adjacencyMatrix[nodes.get(i)][nodes.get(j)];
   }
 
   @Override

@@ -1,8 +1,6 @@
 package graphs;
 
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,14 +8,14 @@ public class GraphTester {
     public static void main(String[] args) throws IOException, InvalidNodeException {
         String filename = "./example_graph.txt";
 
-        //Graph withAdjacencyMatrix = new GraphWithAdjacencyMatrix(filename);
-        Graph withAdjacencyList = new GraphWithAdjacencyList(filename);
-        
+        Graph withAdjacencyMatrix = new GraphWithAdjacencyMatrix(filename);
+        //Graph withAdjacencyList = new GraphWithAdjacencyList(filename);
+
         List<Graph> graphs = new ArrayList<>();
         List<String> names = new ArrayList<>();
         
-        //graphs.add(withAdjacencyMatrix);
-        graphs.add(withAdjacencyList);
+        graphs.add(withAdjacencyMatrix);
+        //graphs.add(withAdjacencyList);
         
         names.add("adjacency matrix");
         names.add("adjacency list");

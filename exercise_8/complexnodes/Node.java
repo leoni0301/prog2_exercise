@@ -4,7 +4,7 @@ public class Node {
     private final String label;
     private final double value;
     
-    public Node(String label, double value) {
+    Node(String label, double value) {
         this.label = label;
         this.value = value;
     }
