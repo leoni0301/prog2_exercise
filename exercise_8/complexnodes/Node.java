@@ -1,10 +1,10 @@
 package complexnodes;
 
-public class Node {
+public class Node<T> {
     private final String label;
-    private final double value;
+    private final T value;
     
-    Node(String label, double value) {
+    Node(String label, T value) {
         this.label = label;
         this.value = value;
     }
@@ -13,7 +13,7 @@ public class Node {
         return label;
     }
     
-    public double getValue() {
+    public T getValue() {
         return value;
     }
 }
