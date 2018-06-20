@@ -1,23 +1,23 @@
 package complexnodes;
 
-public class Edge {
-    private final Node nodeA;
-    private final Node nodeB;
+public class Edge<T> {
+    private final T nodeA;
+    private final T nodeB;
     private final String label;
     private final double weight;
     
-    public Edge(Node nodeA, Node nodeB, String label, double weight) {
+    public Edge(T nodeA, T nodeB, String label, double weight) {
         this.nodeA = nodeA;
         this.nodeB = nodeB;
         this.label = label;
         this.weight = weight;
     }
     
-    public Node getFirstNode() {
+    public T getFirstNode() {
         return nodeA;
     }
     
-    public Node getSecondNode() {
+    public T getSecondNode() {
         return nodeB;
     }    
     
