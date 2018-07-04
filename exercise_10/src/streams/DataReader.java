@@ -5,6 +5,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import ex11.streams.Token;
 
 public class DataReader {
@@ -28,6 +32,12 @@ public class DataReader {
 
 		List<Token> tokens = readTokensFromFile("schachnovelle.corpus");
 		
-		// implement stream computations here		
+		// implement stream computations here
+		List<Token> namedEntityTokens = tokens.stream().filter(t -> t.getNamedEntityType() != "NONE").collect(Collectors.toList());
+
+    //List<Token> distinctPosTokens = tokens.stream().distinct()
+
+    Stream<String> charStream = tokens.stream().map(t -> t.getContent()).flatMap(s -> Stream.of(s.split("")));
+    Stream<String> distinctCharStream = charStream.distinct();
 	}
 }
