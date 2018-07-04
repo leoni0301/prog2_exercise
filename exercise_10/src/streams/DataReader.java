@@ -5,9 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
+import ex11.streams.Token;
 
 public class DataReader {
 	public static List<Token> readTokensFromFile(String filename) throws IOException {
@@ -27,7 +25,8 @@ public class DataReader {
 	}
 	
 	public static void main(String[] args) throws IOException {
-		List<Token> tokens = readTokensFromFile("/path/to/schachnovelle.corpus");
+
+		List<Token> tokens = readTokensFromFile("schachnovelle.corpus");
 		
 		// implement stream computations here		
 	}
