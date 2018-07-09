@@ -1,6 +1,5 @@
 package elementutils;
 
 public interface TwoElementPredicate {
-
-  public static betterElement(String object1, String object2)
+   boolean betterElement(Object object1, Object object2);
 }
